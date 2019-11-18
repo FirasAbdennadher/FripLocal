@@ -20,15 +20,23 @@ class annonce_chaussure{
 		$this->pointure_chauss_an = $pointure_chauss_an;
 	}
 
-	public function deposer(){
-
+	public function add($cnx){
+		
 	}
-
-	public function modifier(){
-
+	
+	public function edit($cnx){
+		
 	}
-
-	public function supprimer(){
+	
+	public function supp($cnx){
+		
+	}
+	
+	public function liste($cnx){
+		
+	}
+	
+	public function detail($cnx){
 		
 	}
 }
