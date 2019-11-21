@@ -2,7 +2,7 @@
 class role{
 	private $role;
 
-	public function __constructor($role){
+	public function __construct($role){
 		$this->role = $role;
 	}
 

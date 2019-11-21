@@ -11,15 +11,11 @@ $prenom_pers="";
 $email_pers="";
 $mdp_pers="";
 $tel_pers="";
-
+$id_role=1;
 
 //recupétation des variables externes
-if(isset($_REQUEST['action']))
-$action=$_REQUEST['action'];
-
-
-if(isset($_REQUEST['id_pers']))
-$id_pers=$_REQUEST['id_pers'];
+if(isset($_POST['id_pers']))
+$id_pers=$_POST['id_pers'];
 
 if(isset($_POST['nom_pers']))
 $nom_pers=$_POST['nom_pers'];
@@ -28,50 +24,49 @@ $nom_pers=$_POST['nom_pers'];
 if(isset($_POST['prenom_pers']))
 $prenom_pers=$_POST['prenom_pers'];
 
-if(isset($_REQUEST['email_pers']))
-$email_pers=$_REQUEST['email_pers'];
+if(isset($_POST['email_pers']))
+$email_pers=$_POST['email_pers'];
 
-if(isset($_REQUEST['mdp_pers']))
-$mdp_pers=$_REQUEST['mdp_pers'];
+if(isset($_POST['mdp_pers']))
+$mdp_pers=$_POST['mdp_pers'];
 
-if(isset($_REQUEST['tel_pers']))
-$tel_pers=$_REQUEST['tel_pers'];
+if(isset($_POST['tel_pers']))
+$tel_pers=$_POST['tel_pers'];
 
 //creation de l'objet
-$personne=new personne($nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers);
+$pers=new personne($id_pers,$nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers,$id_role);
 $l=$email_pers;
 $m=$mdp_pers;
-
 switch($action){
 	case "login1":include "vue/admin/login.php";
 	break;
 	
 	case "login":
 		
-		$personne->login($cnx,$l,$m);
+		$pers->login($cnx);
 	break;
 	
-	case "logout":$personne->logout();
+	case "logout":$pers->logout();
 	break;
 	
 	case "add1":include "vue/admin/ajout_admin.php";
 	break;
 	
-	case "add":$personne->add($cnx);
+	case "add":$pers->add($cnx);
 	break;
 	
-	case "supp":$personne->supp($cnx);
+	case "supp":$pers->supp($cnx);
 	break;
 	
-	case "liste":$personnes=$personne->liste($cnx);
+	case "liste":$personnes=$pers->liste($cnx);
 	include "vue/admin/liste_admin.php";
 	break;
 	
-	case "edit1":$personne=$personne->detail($cnx);
+	case "edit1":$personne=$pers->detail($cnx);
 	include "vue/admin/modifier_admin.php";
 	break;
 	
-	case "edit":$personne->edit($cnx);
+	case "edit":$pers->edit($cnx);
 	break;
 }
 ?>

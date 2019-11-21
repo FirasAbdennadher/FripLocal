@@ -1,5 +1,5 @@
 <?php
-class annonce{
+class annonce extends fonction{
 
 
 	private $id_an;
