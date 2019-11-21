@@ -10,7 +10,6 @@ $date_pub_an="";
 $couleur_an="";
 $region_an="";
 $pointure_chauss_an="";
-$action = "auth1";
 
 //recupétation des variables externes
 if (isset($_REQUEST['action']))
