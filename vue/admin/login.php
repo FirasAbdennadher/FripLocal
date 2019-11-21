@@ -9,7 +9,7 @@
 <span style="<?php if(isset($_GET['error'])) echo "display:block"; else echo "display:none;"?>" class="alert-danger">verfivier vos parametres de connexion!</span>
       <form action="login.php?controller=admin&action=login" method="post">
         <div class="input-group mb-3">
-          <input type="text" name="email_pers" class="form-control" placeholder="Login">
+          <input type="email" name="email_pers" class="form-control" placeholder="Login">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
