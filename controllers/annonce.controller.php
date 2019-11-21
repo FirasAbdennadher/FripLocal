@@ -1,4 +1,5 @@
 <?php //session_start();
+include "includes/fonction.class.php";
 include "models/annonce.class.php";
 
 //initialisation des parametres 

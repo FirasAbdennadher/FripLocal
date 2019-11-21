@@ -15,20 +15,16 @@
 	</select> 
 	<br> Marque :
     <select name="id_marque">
-        <option value ="none">Nothing</option>
-        <option value ="guava">Guava</option>
-        <option value ="lychee">Lychee</option>
-        <option value ="papaya">Papaya</option>
+       
+        <option value ="1">Papaya</option>
 	</select> 
 	<br> categorie :
     <select name="id_categorie">
-        <option value ="none">Nothing</option>
-        <option value ="guava">Guava</option>
-        <option value ="lychee">Lychee</option>
-        <option value ="papaya">Papaya</option>
+        
+        <option value ="1">Papaya</option>
     </select> 
 	<br> Pointure :<input type="text" name="id_pers" required>
-	<br>  :<input type="hiden" name="taille" required>
+	<br>  <input type="hidden" name="taille" required>
 	<br> <input type="submit" name="submit" value="ajouter">	
 </form>
 

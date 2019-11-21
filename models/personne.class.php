@@ -9,14 +9,17 @@ class personne extends fonction{
 	private $id_role;
 
 
-	public function __constructor($nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers){
+	public function __construct($id_pers,$nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers,$id_role){
+		$this->id_pers = $id_pers;
 		$this->nom_pers = $nom_pers;
 		$this->prenom_pers = $prenom_pers;
 		$this->email_pers = $email_pers;
 		$this->mdp_pers = $mdp_pers;
 		$this->tel_pers = $tel_pers;
+		$this->id_role = $id_role;
 	}
 	
+
 
 	public function add($cnx){
 		$res=$cnx->prepare("insert into personne (nom_pers, prenom_pers,email_pers, mdp_pers, tel_pers) values(?,?,?,?,?)");
@@ -42,21 +45,24 @@ class personne extends fonction{
 	}
 	
 	public function liste($cnx){
-		$admins=$cnx->query("select * from personne")->fetchAll(PDO::FETCH_OBJ);
-		return $admins;
+		
+		$personnes=$cnx->query("select * from personne")->fetchAll(PDO::FETCH_OBJ);
+		return $personnes;
 	}
 	
 	public function detail($cnx){
-		$admin=$cnx->query("select * from personne where id_pers='".$this->id_pers."'")->fetch(PDO::FETCH_OBJ);
-		return $admin;
+		
+		$personne=$cnx->query("select * from personne where id_pers='".$this->id_pers."'")->fetch(PDO::FETCH_OBJ);
+		
+		return $personne;
 	}
 	
-	public function login($cnx,$l,$m){
-
-		$admin=$cnx->query("select * from personne where email_pers='".$l."' and mdp_pers='".$m."'")->fetch(PDO::FETCH_OBJ);
-		if(is_object($admin)){
-			$_SESSION['email_pers']=$l;
-			$_SESSION['mdp_pers']=$m;
+	public function login($cnx){
+		
+		$personne=$cnx->query("select * from personne where email_pers='".$this->email_pers."' and mdp_pers='".$this->mdp_pers."'")->fetch(PDO::FETCH_OBJ);
+		if(is_object($personne)){
+			$_SESSION['email_pers']=$this->email_pers;
+			$_SESSION['mdp_pers']=$this->mdp_pers;
 			$this->redirect("index.php");
 		}else{
 			$this->redirect("login.php?error=1");
