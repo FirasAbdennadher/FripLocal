@@ -1,7 +1,7 @@
 <?php //session_start();
 
 include "includes/fonction.class.php";
-include "models/admin.class.php";
+include "models/personne.class.php";
 
 //initialisation des parametres
 $fn=new fonction();
@@ -38,38 +38,40 @@ if(isset($_REQUEST['tel_pers']))
 $tel_pers=$_REQUEST['tel_pers'];
 
 //creation de l'objet
-$admin=new admin($nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers);
-
+$personne=new personne($nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers);
+$l=$email_pers;
+$m=$mdp_pers;
 
 switch($action){
 	case "login1":include "vue/admin/login.php";
 	break;
 	
 	case "login":
-		$admin->login($cnx);
+		
+		$personne->login($cnx,$l,$m);
 	break;
 	
-	case "logout":$admin->logout();
+	case "logout":$personne->logout();
 	break;
 	
 	case "add1":include "vue/admin/ajout_admin.php";
 	break;
 	
-	case "add":$admin->add($cnx);
+	case "add":$personne->add($cnx);
 	break;
 	
-	case "supp":$admin->supp($cnx);
+	case "supp":$personne->supp($cnx);
 	break;
 	
-	case "liste":$admins=$admin->liste($cnx);
+	case "liste":$personnes=$personne->liste($cnx);
 	include "vue/admin/liste_admin.php";
 	break;
 	
-	case "edit1":$admin=$admin->detail($cnx);
+	case "edit1":$personne=$personne->detail($cnx);
 	include "vue/admin/modifier_admin.php";
 	break;
 	
-	case "edit":$admin->edit($cnx);
+	case "edit":$personne->edit($cnx);
 	break;
 }
 ?>

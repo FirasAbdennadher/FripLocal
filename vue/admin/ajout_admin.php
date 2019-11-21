@@ -1,5 +1,5 @@
 <h1>Ajouter admin</h1>
-<form method="post" action="index.php?controller=admin&action=add" enctype="multipart/form-data">
+<form method="post" action="index.php?controller=personne&action=add" enctype="multipart/form-data">
 <br>nom : <input type="text" name="nom_pers" required>
 <br>prenom : <input type="text" name="prenom_pers" required>
 <br>Email : <input type="email" name="email_pers" required>

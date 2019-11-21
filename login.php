@@ -2,7 +2,7 @@
 include_once 'includes/connexion.php'; 
 
 //initialisation des variables $controleur et $action 
-$controller='admin'; 
+$controller='personne'; 
 $action='login1';
 
 //Recupération 
@@ -31,7 +31,6 @@ $action =$_REQUEST['action']; ?>
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 <body class="hold-transition login-page">
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 <?php include 'controllers/'.$controller.'.controller.php'; ?>
 
 <!-- /.login-box -->
