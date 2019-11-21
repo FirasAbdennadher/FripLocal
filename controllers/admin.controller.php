@@ -1,7 +1,7 @@
 <?php //session_start();
 
-include "../include/fonction.class.php";
-include "../models/admin.class.php";
+include "includes/fonction.class.php";
+include "models/admin.class.php";
 
 //initialisation des parametres
 $fn=new fonction();
@@ -11,7 +11,6 @@ $prenom_pers="";
 $email_pers="";
 $mdp_pers="";
 $tel_pers="";
-$action="add1";
 
 
 //recupétation des variables externes
@@ -43,16 +42,17 @@ $admin=new admin($nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers);
 
 
 switch($action){
-	case "login1":include "views/admin/login.php";
+	case "login1":include "vue/admin/login.php";
 	break;
 	
-	case "login":$admin->login($cnx);
+	case "login":
+		$admin->login($cnx);
 	break;
 	
 	case "logout":$admin->logout();
 	break;
 	
-	case "add1":include "views/admin/ajout_admin.php";
+	case "add1":include "vue/admin/ajout_admin.php";
 	break;
 	
 	case "add":$admin->add($cnx);
@@ -62,11 +62,11 @@ switch($action){
 	break;
 	
 	case "liste":$admins=$admin->liste($cnx);
-	include "views/admin/liste_admin.php";
+	include "vue/admin/liste_admin.php";
 	break;
 	
 	case "edit1":$admin=$admin->detail($cnx);
-	include "views/admin/modifier_admin.php";
+	include "vue/admin/modifier_admin.php";
 	break;
 	
 	case "edit":$admin->edit($cnx);

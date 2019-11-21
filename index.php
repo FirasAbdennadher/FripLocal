@@ -1,8 +1,11 @@
-<?php
+<?php 
+session_start();
+include_once 'includes/security.php'; 
 include_once "includes/connexion.php";
 //initialisation des variables $controller et $action
-$controller = "Abonnee";
-$action = "auth1";
+
+$controller = "admin";
+$action = "liste";
 //Recupération
 if (isset($_REQUEST["controller"]))
     $controller = $_REQUEST["controller"];
