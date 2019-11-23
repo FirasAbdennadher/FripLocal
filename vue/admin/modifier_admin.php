@@ -12,7 +12,7 @@
 
 <br>password : <input type="password" name="mdp_pers" value="<?php echo $personne->mdp_pers;?>" required>
 
-<input type="hidden" name="id_pers" value="<?php echo $personne->id_pers;?>">
+<input type="hidden" name="id" value="<?php echo $personne->id;?>">
 
 <br><input type="submit" name="submit" value="Modifier">
 

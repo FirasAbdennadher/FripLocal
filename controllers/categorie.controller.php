@@ -3,18 +3,24 @@ include "includes/fonction.class.php";
 include "models/categorie.class.php";
 
 //initialisation des parametres
+$id="";
 $nom_cat = "";
 
 
 //recupétation des variables externes
 
+if(isset($_REQUEST['action']))
+$action=$_REQUEST['action'];
+
+if(isset($_REQUEST['id']))
+$id=$_REQUEST['id'];
 
 
-if (isset($_REQUEST['$nom_cat']))
-	$nom_cat = $_REQUEST['nom_cat'];
+if (isset($_POST['nom_cat']))
+	$nom_cat = $_POST['nom_cat'];
 
 //creation de l'objet
-$cat = new categorie($nom_cat);
+$cat = new categorie($id,$nom_cat);
 
 
 switch ($action) {
@@ -26,7 +32,10 @@ switch ($action) {
 	case "add":$cat->add($cnx);
 	break;
 	
-	case "supp":$cat->supp($cnx);
+	case "supp":
+		print_r($cat);
+	exit();
+		$cat->supp($cnx);
 	break;
 	
 	case "liste":$categories=$cat->liste($cnx);
@@ -34,7 +43,7 @@ switch ($action) {
 	break;
 	
 	case "edit1":$categorie=$cat->detail($cnx);
-	include "view/categorie/modifier_categorie.php";
+	include "vue/categorie/modifier_categorie.php";
 	break;
 	
 	case "edit":$cat->edit($cnx);

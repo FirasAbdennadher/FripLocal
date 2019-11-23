@@ -1,25 +1,27 @@
 <?php
 class categorie extends fonction{
-	private $id_cat;
+	private $id;
 	private $nom_cat;
 
-
-	public function __constructor($nom_cat){
+	public function __construct($id,$nom_cat){
+		$this->id = $id;
 		$this->nom_cat = $nom_cat;
 	}
 
 	public function add($cnx){
-		$cnx->exec("insert into categorie (nom_categorie) values('".$this->nom_cat."')");
-		$this->redirect("index.php?controleur=categorie&action=liste");
+		$res=$cnx->prepare("insert into categorie (nom_cat) values(?)");
+		$res->execute([$this->nom_cat]);
+		$this->redirect("index.php?controller=categorie&action=liste");
+		//header("location:index.php?controller=categorie&action=liste");
 	}
 	public function edit($cnx){
-		$cnx->exec("update categorie set nom_categorie='".$this->nom_cat."' where id='".$this->id_cat."'");
-		$this->redirect("index.php?controleur=categorie&action=liste");
+		$cnx->exec("update categorie set nom_cat='".$this->nom_cat."' where id='".$this->id."'");
+		$this->redirect("index.php?controller=categorie&action=liste");
 	
 	}
 	public function supp($cnx){
-		$cnx->exec("delete from categorie where id='".$this->id_cat."'");
-		$this->redirect("index.php?controleur=categorie&action=liste");
+		$cnx->exec("delete from categorie where id='".$this->id."'");
+		$this->redirect("index.php?controller=categorie&action=liste");
 	}
 	public function liste($cnx){
 		$categories=$cnx->query("select * from categorie")->fetchAll(PDO::FETCH_OBJ);
@@ -28,9 +30,8 @@ class categorie extends fonction{
 	
 	public function detail($cnx){
 		$categorie=$cnx->query("select * from categorie where id='".$this->id."'")->fetch(PDO::FETCH_OBJ);
-		return $categorie;
+		return $categorie;}
 
 
-}
 }
 ?>
