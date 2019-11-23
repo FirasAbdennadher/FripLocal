@@ -5,7 +5,7 @@ include_once "includes/connexion.php";
 //initialisation des variables $controller et $action
 
 $controller = "personne";
-$action = "liste";
+$action = "add1";
 //Recupération
 if (isset($_REQUEST["controller"]))
     $controller = $_REQUEST["controller"];

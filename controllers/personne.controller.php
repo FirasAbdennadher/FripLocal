@@ -11,7 +11,8 @@ $prenom_pers="";
 $email_pers="";
 $mdp_pers="";
 $tel_pers="";
-$id_role=1;
+$status="";
+$id_role=2;
 
 //recupétation des variables externes
 if(isset($_REQUEST['id']))
@@ -33,8 +34,13 @@ $mdp_pers=$_POST['mdp_pers'];
 if(isset($_POST['tel_pers']))
 $tel_pers=$_POST['tel_pers'];
 
+if(isset($_POST['status']))
+$status=$_POST['status'];
+else $status='Non-acceptée';
+
+
 //creation de l'objet
-$pers=new personne($id,$nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers,$id_role);
+$pers=new personne($id,$nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers,$id_role,$status);
 
 switch($action){
 	case "login1":include "vue/admin/login.php";
