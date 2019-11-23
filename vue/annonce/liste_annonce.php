@@ -4,6 +4,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+            <input type="button" value="nouvelle annoce" onclick="window.location.href='index.php?controller=annonce&action=add1'">
 <?php
 echo '<table  id="example1" class="table table-bordered table-striped">
 <thead>
@@ -25,17 +26,14 @@ echo '<table  id="example1" class="table table-bordered table-striped">
 </thead>
 <tbody>
 ';
+
 foreach($annonces as $annonce){
-    $titre_an="";
-    $prix_an="";
-    $description_an="";
-    $date_pub_an="";
-    $couleur_an="";
-    $region_an="";
-    $taille="";
-    $id_marque="";
-    $id_categorie="";
-    
+  $mar=new marque($annonce->id_marque,"");
+$cat=new categorie($annonce->id_categorie,"");
+  $marque=$mar->detail($cnx);
+  $categ=$cat->detail($cnx);
+
+
 	echo "<tr>";
 		echo "
 			
@@ -46,9 +44,9 @@ foreach($annonces as $annonce){
       <td>".$annonce->couleur_an."</td>
       <td>".$annonce->region_an."</td>
 			<td>".$annonce->taille."</td>
-			<td>".$annonce->id_marque."</td>
-			<td>".$annonce->id_categorie."</td>
-			<td><a onclick=\"if(!confirm('Etes vous sure de supprimer?')) return false\" href='index.php?controller=annonce&action=supp&id=".$annonce->id_an."'>supp</a> <a href='index.php?controller=annonce&action=edit1&id=".$annonce->id_an."'>modif</a></td>
+			<td>".$marque->nom_marq."</td>
+			<td>".$categ->nom_cat."</td>
+			<td><a onclick=\"if(!confirm('Etes vous sure de supprimer?')) return false\" href='index.php?controller=annonce&action=supp&id_an=".$annonce->id_an."'>supp</a> <a href='index.php?controller=annonce&action=edit1&id_an=".$annonce->id_an."'>modif</a></td>
 		";
 	echo "</tr>";
 	

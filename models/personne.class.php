@@ -9,6 +9,7 @@ class personne extends fonction{
 	private $id_role;
 
 
+
 	public function __construct($id,$nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers,$id_role){
 		$this->id = $id;
 		$this->nom_pers = $nom_pers;
@@ -64,8 +65,13 @@ class personne extends fonction{
 		
 		$personne=$cnx->query("select * from personne where email_pers='".$this->email_pers."' and mdp_pers='".$this->mdp_pers."'")->fetch(PDO::FETCH_OBJ);
 		if(is_object($personne)){
+			
+
 			$_SESSION['email_pers']=$this->email_pers;
 			$_SESSION['mdp_pers']=$this->mdp_pers;
+			$_SESSION['id']=$personne->id;
+			$_SESSION['id_role']=$this->id_role;
+
 			$this->redirect("index.php");
 		}else{
 			$this->redirect("login.php?error=1");

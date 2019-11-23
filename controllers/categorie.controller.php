@@ -33,8 +33,7 @@ switch ($action) {
 	break;
 	
 	case "supp":
-		print_r($cat);
-	exit();
+		
 		$cat->supp($cnx);
 	break;
 	

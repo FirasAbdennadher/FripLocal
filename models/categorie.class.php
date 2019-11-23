@@ -7,6 +7,7 @@ class categorie extends fonction{
 		$this->id = $id;
 		$this->nom_cat = $nom_cat;
 	}
+	
 
 	public function add($cnx){
 		$res=$cnx->prepare("insert into categorie (nom_cat) values(?)");

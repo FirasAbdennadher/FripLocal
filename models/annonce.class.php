@@ -15,7 +15,8 @@ class annonce extends fonction{
 	private $id_pers;
 
 
-	public function __construct($titre_an,$prix_an,$description_an,$date_pub_an,$couleur_an,$region_an,$taille,$id_marque,$id_categorie,$id_pers){
+	public function __construct($id_an,$titre_an,$prix_an,$description_an,$date_pub_an,$couleur_an,$region_an,$taille,$id_marque,$id_categorie,$id_pers){
+		$this->id_an = $id_an;
 		$this->titre_an = $titre_an;
 		$this->prix_an = $prix_an;
 		$this->description_an = $description_an;
@@ -29,8 +30,10 @@ class annonce extends fonction{
 	}
 
 	public function add($cnx){
+
 		$res=$cnx->prepare("insert into annonce(titre_an,prix_an,description_an,date_pub_an,couleur_an,region_an,id_marque, id_categorie,taille,id_pers) VALUES (?,?,?,?,?,?,?,?,?,?)");
-		$res->execute([$this->titre_an, $this->prix_an, $this->description_an,$this->date_pub_an,$this->couleur_an,$this->region_an, $this->taille,$this->id_marque,$this->id_categorie,$this->id_pers]);
+		$res->execute([$this->titre_an, $this->prix_an, $this->description_an,$this->date_pub_an,$this->couleur_an,$this->region_an,$this->id_marque,$this->id_categorie, $this->taille,$this->id_pers]);
+		
 		$this->redirect("index.php?controller=annonce&action=liste");
 	}
 	

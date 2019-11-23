@@ -4,6 +4,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
+			<input type="button" value="nouveau admin" onclick="window.location.href='index.php?controller=personne&action=add1'">
 <?php
 echo '<table id="example1" class="table table-bordered table-striped">
 <thead>
