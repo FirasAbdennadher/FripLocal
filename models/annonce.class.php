@@ -15,7 +15,7 @@ class annonce extends fonction{
 	private $id_pers;
 
 
-	public function __constructor($titre_an,$prix_an,$description_an,$date_pub_an,$couleur_an,$region_an,$taille,$id_marque,$id_categorie,$id_pers){
+	public function __construct($titre_an,$prix_an,$description_an,$date_pub_an,$couleur_an,$region_an,$taille,$id_marque,$id_categorie,$id_pers){
 		$this->titre_an = $titre_an;
 		$this->prix_an = $prix_an;
 		$this->description_an = $description_an;

@@ -15,6 +15,7 @@ echo '<table id="example1" class="table table-bordered table-striped">
 	<th>prenom</th>
 	<th>email</th>
 	<th>numero</th>
+	<th>rolle</th>
 	<th>action</th>
 </tr>
 </thead>
@@ -28,8 +29,14 @@ foreach($personnes as $personne){
 			<td>".$personne->prenom_pers."</td>
 			<td>".$personne->email_pers."</td>
 			<td>".$personne->tel_pers."</td>
+			<td>".$personne->id_role."</td>
+			<td> <a href='index.php?controller=personne&action=supp&id=".$personne->id."'>supp</a> 
+			<a href='index.php?controller=personne&action=edit1&id=".$personne->id."'>modif</a></td>
+
+
+
+
 			
-			<td><a onclick=\"if(!confirm('Etes vous sure de supprimer?')) return false\" href='index.php?controller=personne&action=supp&id=".$personne->id_pers."'>supp</a> <a href='index.php?controller=personne&action=edit1&id=".$personne->id_pers."'>modif</a></td>
 		";
 	echo "</tr>";
 	
@@ -43,6 +50,7 @@ echo "
 <th>prenom</th>
 <th>email</th>
 <th>numero</th>
+<th>rolle</th>
 <th>action</th>
 </tr>
 </tfoot>

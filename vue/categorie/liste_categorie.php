@@ -1,5 +1,5 @@
-<h1>Liste des inscrits</h1>
-<input type="button" value="nouveau inscrit" onclick="window.location.href='index.php?controleur=categorie&action=add1'">
+<h1>Liste des categories</h1>
+<input type="button" value="nouveau inscrit" onclick="window.location.href='index.php?controller=categorie&action=add1'">
 <?php
 echo "<table border=1>
 <tr>
@@ -13,8 +13,8 @@ foreach($categories as $categorie){
 			
 			<td>".$categorie->nom_cat."</td>
 			<td>
-			    <a href='index.php?controleur=categorie&action=supp&id=".$categorie->id_cat."'>supp</a> 
-                            <a href='index.php?controleur=inscrit&action=edit1&id=".$categorie->id_cat."'>modif</a>
+			    <a href='index.php?controller=categorie&action=supp&id=".$categorie->id."'>supp</a> 
+                            <a href='index.php?controller=categorie&action=edit1&id=".$categorie->id."'>modif</a>
                         </td>
 		";
 	echo "</tr>";
