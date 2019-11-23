@@ -7,23 +7,27 @@ class personne extends fonction{
 	private $mdp_pers;
 	private $tel_pers;
 	private $id_role;
+	private $status;
 
 
-	public function __construct($id,$nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers,$id_role){
+
+	public function __construct($id,$nom_pers,$prenom_pers,$email_pers,$mdp_pers,$tel_pers,$id_role,$status){
 		$this->id = $id;
 		$this->nom_pers = $nom_pers;
 		$this->prenom_pers = $prenom_pers;
 		$this->email_pers = $email_pers;
 		$this->mdp_pers = $mdp_pers;
 		$this->tel_pers = $tel_pers;
-		$this->id_role = $id_role;
+		$this->id_role = $id_role;		
+		$this->status = $status;
+
 	}
 	
 
 
 	public function add($cnx){
-		$res=$cnx->prepare("insert into personne (id_role,nom_pers, prenom_pers,email_pers, mdp_pers, tel_pers) values(?,?,?,?,?,?)");
-		$res->execute([$this->id_role,$this->nom_pers, $this->prenom_pers,$this->email_pers,$this->mdp_pers,$this->tel_pers]);
+		$res=$cnx->prepare("insert into personne (id_role,nom_pers, prenom_pers,email_pers, mdp_pers, tel_pers,status) values(?,?,?,?,?,?,?)");
+		$res->execute([$this->id_role,$this->nom_pers, $this->prenom_pers,$this->email_pers,$this->mdp_pers,$this->tel_pers,$this->status]);
 		$this->redirect("index.php?controller=personne&action=liste");
 	}
 	
