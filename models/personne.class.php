@@ -32,13 +32,14 @@ class personne extends fonction{
 	}
 	
 	public function edit($cnx){
-		$res=$cnx->prepare("update personne set nom_pers=?,prenom_pers=?,email_pers=?,mdp_pers=?,tel_pers=? where id=?");
+		$res=$cnx->prepare("update personne set nom_pers=?,prenom_pers=?,email_pers=?,mdp_pers=?,tel_pers=?,status=? where id=?");
 		$res->bindParam(1,$this->nom_pers);
 		$res->bindParam(2,$this->prenom_pers);
 		$res->bindParam(3,$this->email_pers);
 		$res->bindParam(4,$this->mdp_pers);
-		$res->bindParam(4,$this->tel_pers);
-		$res->bindParam(5,$this->id);
+		$res->bindParam(5,$this->tel_pers);
+		$res->bindParam(6,$this->status);
+		$res->bindParam(7,$this->id);
 		$res->execute();
 		$this->redirect("index.php?controller=personne&action=liste");
 	}
@@ -65,15 +66,14 @@ class personne extends fonction{
 	}
 	
 	public function login($cnx){
-		
-		$personne=$cnx->query("select * from personne where email_pers='".$this->email_pers."' and mdp_pers='".$this->mdp_pers."'")->fetch(PDO::FETCH_OBJ);
-		if(is_object($personne)){
-			$_SESSION['email_pers']=$this->email_pers;
-			$_SESSION['mdp_pers']=$this->mdp_pers;
-			$this->redirect("index.php");
-		}else{
-			$this->redirect("login.php?error=1");
-		}
+$personne=$cnx->query("select * from personne where email_pers='".$this->email_pers."' and mdp_pers='".$this->mdp_pers."'")->fetch(PDO::FETCH_OBJ);
+if(is_object($personne)){
+	$_SESSION['email_pers']=$this->email_pers;
+	$_SESSION['mdp_pers']=$this->mdp_pers;
+	$this->redirect("index.php");
+}else{
+	$this->redirect("login.php?error=1");
+}
 	}
 	
 	public function logout(){

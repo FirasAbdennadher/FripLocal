@@ -1,5 +1,5 @@
 <div class="login-box">
-  <div class="login-logo">
+  <div class="login-logo"> 
     <a href="index2.html"><b>Authentification</b></a>
   </div>
   <!-- /.login-logo -->
@@ -9,7 +9,7 @@
 <span style="<?php if(isset($_GET['error'])) echo "display:block"; else echo "display:none;"?>" class="alert-danger">verfivier vos parametres de connexion!</span>
       <form action="login.php?controller=personne&action=login" method="post">
         <div class="input-group mb-3">
-          <input type="email" name="email_pers" class="form-control" placeholder="Login">
+          <input type="text" name="email_pers" class="form-control" placeholder="Login">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
