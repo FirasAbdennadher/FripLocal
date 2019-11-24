@@ -8,8 +8,7 @@
 <br>prenom : <input type="email" name="email_pers" value="<?php echo $personne->email_pers;?>" required>
 
 <br>numero tel : <input type="number" name="tel_pers" value="<?php echo $personne->tel_pers;?>" required>
-<br>
-
+<br> Valider <input type="checkbox" name="status" value="Accéptée" <?php if($personne->status=='Accéptée') echo 'checked=checked';?>>
 <br>password : <input type="password" name="mdp_pers" value="<?php echo $personne->mdp_pers;?>" required>
 
 <input type="hidden" name="id" value="<?php echo $personne->id;?>">
