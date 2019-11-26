@@ -1,3 +1,7 @@
+<?php
+
+
+?>
 <h1>Ajouter annonce </h1>
 
 <form method="post" action="index.php?controller=annonce&action=add" enctype="multipart/form-data">
@@ -13,18 +17,44 @@
         <option value ="lychee">Lychee</option>
         <option value ="papaya">Papaya</option>
 	</select> 
+	
 	<br> Marque :
     <select name="id_marque">
-       
-        <option value ="1">Papaya</option>
+	<?php 
+	$mar=new marque("","");
+	$lis=$mar->liste($cnx);
+	foreach($lis as $mar){
+		echo"<option value =".$mar->id.">".$mar->nom_marq."</option>";
+	}
+		?>
+		
 	</select> 
 	<br> categorie :
+	
     <select name="id_categorie">
-        
-        <option value ="1">Papaya</option>
+	<?php 
+	$cat=new categorie("","");
+	$lis=$cat->liste($cnx);
+	foreach($lis as $cat){
+		echo"<option value =".$cat->id.">".$cat->nom_cat."</option>";
+	}
+		?>
+			
     </select> 
-	<br> Pointure :<input type="text" name="id_pers" required>
-	<br>  <input type="hidden" name="taille" required>
+	<br> Pointure :<input type="text" name="taille" required>
+	<br> Taille :
+    <select name="taille">
+        <option value ="S">S</option>
+        <option value ="XS">XS</option>
+        <option value ="M">M</option>
+		<option value ="L">L</option>
+		<option value ="XL">XL</option>
+        <option value ="XXL">XXL</option>
+		<option value ="XXXL">XXXL</option>
+		<option value="autre">autre</option>
+       
+	</select> 
+
 	<br> <input type="submit" name="submit" value="ajouter">	
 </form>
 

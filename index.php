@@ -4,8 +4,13 @@ include_once 'includes/security.php';
 include_once "includes/connexion.php";
 //initialisation des variables $controller et $action
 
+<<<<<<< HEAD
 $controller = "personne";
 $action = "add1";
+=======
+$controller = "souscategorie";
+$action = "liste";
+>>>>>>> 81592db5be75a6ea391c3365df5a4fb3480e7d6c
 //Recupération
 if (isset($_REQUEST["controller"]))
     $controller = $_REQUEST["controller"];
