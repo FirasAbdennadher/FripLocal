@@ -7,7 +7,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 <span style="<?php if(isset($_GET['error'])) echo "display:block"; else echo "display:none;"?>" class="alert-danger">verfivier vos parametres de connexion!</span>
-      <form action="login.php?controller=personne&action=login" method="post">
+      <form action="index.php?controller=personne&action=login" method="post">
         <div class="input-group mb-3">
           <input type="text" name="email_pers" class="form-control" placeholder="Login">
           <div class="input-group-append">
