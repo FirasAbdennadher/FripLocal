@@ -12,7 +12,7 @@ $email_pers = "";
 $mdp_pers = "";
 $tel_pers = "";
 $status = "";
-$id_role = 2;
+$id_role = "2";
 
 //recupétation des variables externes
 if (isset($_REQUEST['id']))

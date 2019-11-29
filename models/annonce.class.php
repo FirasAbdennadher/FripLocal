@@ -13,9 +13,10 @@ class annonce extends fonction{
 	private $id_marque;
 	private $id_categorie;
 	private $id_pers;
+	private $photos=array();
 
 
-	public function __construct($id_an,$titre_an,$prix_an,$description_an,$date_pub_an,$couleur_an,$region_an,$taille,$id_marque,$id_categorie,$id_pers){
+	public function __construct($id_an,$titre_an,$prix_an,$description_an,$date_pub_an,$couleur_an,$region_an,$taille,$id_marque,$id_categorie,$id_pers,$photos){
 		$this->id_an = $id_an;
 		$this->titre_an = $titre_an;
 		$this->prix_an = $prix_an;
@@ -27,12 +28,18 @@ class annonce extends fonction{
 		$this->id_marque=$id_marque;
 		$this->id_categorie=$id_categorie;
 		$this->id_pers=$id_pers;
+		$this->photos=$photos;
 	}
 
 	public function add($cnx){
 
 		$res=$cnx->prepare("insert into annonce(titre_an,prix_an,description_an,date_pub_an,couleur_an,region_an,id_marque, id_categorie,taille,id_pers) VALUES (?,?,?,?,?,?,?,?,?,?)");
 		$res->execute([$this->titre_an, $this->prix_an, $this->description_an,$this->date_pub_an,$this->couleur_an,$this->region_an,$this->id_marque,$this->id_categorie, $this->taille,$this->id_pers]);
+		$id=$cnx->lastInsertId();
+		foreach ($this->photos as $photo){
+			$ph= new photo("",$photo,$id);
+			$ph-> add($cnx);
+        }
 		
 		$this->redirect("index.php?controller=annonce&action=liste");
 	}
@@ -55,13 +62,23 @@ class annonce extends fonction{
 	}
 	
 	public function supp($cnx){
+		$ph= new photo("","",$this->id_an);
+		$photo=$ph-> detail_photos($cnx);
 		$cnx->exec("delete from annonce where id_an='".$this->id_an."'");
-		unlink("photos/".$this->photo);
+	
+		foreach($photo as $p){
+			
+		unlink("photos/".$p->nom_photo);
+	}
 		$this->redirect("index.php?controller=annonce&action=liste");
 	}
 	
 	public function liste($cnx){
 		$annonces=$cnx->query("select * from annonce")->fetchAll(PDO::FETCH_OBJ);
+		return $annonces;
+	}
+	public function recherche_avance($cnx, $ch){
+		$annonces=$cnx->query("select * from annonce where ".$ch)->fetchAll(PDO::FETCH_OBJ);
 		return $annonces;
 	}
 	

@@ -1,4 +1,4 @@
-  <div class="site-blocks-cover overlay" style="background-image: url(ac/images/hero_2.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+<div class="site-blocks-cover overlay" style="background-image: url(ac/images/hero_2.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
     <div class="container">
       <div class="row align-items-center justify-content-center text-center">
 
@@ -13,29 +13,56 @@
           </div>
           
           <div class="form-search-wrap" data-aos="fade-up" data-aos-delay="200">
-            <form method="post">
+            <form method="post" action="index.php?controller=annonce&action=liste_avance">
               <div class="row align-items-center">
                 <div class="col-lg-12 mb-4 mb-xl-0 col-xl-4">
-                  <input type="text" class="form-control rounded" placeholder="Que cherchez-vous?">
+                  <input type="text" class="form-control rounded" name="rech_nom" placeholder="Que cherchez-vous?">
                 </div>
                 <div class="col-lg-12 mb-4 mb-xl-0 col-xl-3">
-                  <div class="wrap-icon">
-                    <span class="icon icon-room"></span>
-                    <input type="text" class="form-control rounded" placeholder="Emplacement">
+                <div class="select-wrap">
+                    <span class="icon"><span class="icon-keyboard_arrow_down"></span></span>
+                    <select class="form-control rounded" name="rech_region" id="">
+                      <option value="">Toutes les regions</option>
+                      <option value="Sfax">Sfax</option>
+                      <option value="Tunis">Tunis</option>
+                      <option value="Mahdiya">Mahdiya</option>
+                      <option value="Sousse">Sousse</option>
+                      <option value="Nabel">Nabel</option>
+                      
+                    </select>
                   </div>
-
                 </div>
+
+                <div class="col-lg-12 mb-4 mb-xl-0 col-xl-3">
+                <div class="select-wrap">
+                    <span class="icon"><span class="icon-keyboard_arrow_down"></span></span>
+                    <select class="form-control rounded" name="rech_marque" id="">
+                      <option value="">Toutes les marques</option>
+                      <?php 
+	                        $mar=new marque("","");
+                        	$lis=$mar->liste($cnx);
+                        	foreach($lis as $mar){
+	                      	echo"<option value =".$mar->id.">".$mar->nom_marq."</option>";
+                              	}
+		                  ?>
+                      
+                    </select>
+                  </div>
+                </div>
+
                 <div class="col-lg-12 mb-4 mb-xl-0 col-xl-3">
                   <div class="select-wrap">
                     <span class="icon"><span class="icon-keyboard_arrow_down"></span></span>
-                    <select class="form-control rounded" name="" id="">
-                      <option value="">Toutes les catégories</option>
-                      <option value="">Real Estate</option>
-                      <option value="">Books &amp; Magazines</option>
-                      <option value="">Furniture</option>
-                      <option value="">Electronics</option>
-                      <option value="">Cars &amp; Vehicles</option>
-                      <option value="">Others</option>
+                    <select class="form-control rounded" name="rech_categorie" id="">
+                    <option value="">Toutes les catégories</option>
+                    <?php 
+                        $cat=new categorie("","");
+                        $lis=$cat->liste($cnx);
+                        foreach($lis as $cat){
+                          echo"<option value =".$cat->id.">".$cat->nom_cat."</option>";
+                        }
+                    ?>
+                      
                     </select>
                   </div>
                 </div>

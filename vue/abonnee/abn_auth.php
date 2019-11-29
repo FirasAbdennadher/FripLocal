@@ -68,34 +68,31 @@
 
 
 
-            <form action="index.php?controller=personne&action=login" class="p-5 bg-white">
+            <form method="POST" action="index.php?controller=personne&action=login" class="p-5 bg-white">
 
               <div class="row form-group">
 
                 <div class="col-md-12">
-                  <label class="text-black" for="email">Email</label>
-                  <input type="email" name="email_pers" id="email" class="form-control">
+                  <label class="text-black">Email</label>
+                  <input type="email" name="email_pers" id="email_pers" class="form-control">
                 </div>
-              </div>
-
-              <div class="row form-group">
 
                 <div class="col-md-12">
-                  <label class="text-black" for="subject">Mot de passe</label>
-                  <input type="password" name="mdp_pers" id="subject" class="form-control">
+                  <label class="text-black">Mot de passe</label>
+                  <input type="password" name="mdp_pers" id="mdp_pers" class="form-control">
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-9">
+                  <p>Pas encore membre ? <a href="index.php?controller=personne&action=add1">Cliquez ici</a></p>
+                </div>
+
+                <div class="col-md-3">
+                  <input type="submit" value="Se connecter" class="btn btn-primary py-2 px-4 text-white" id="submit">
                 </div>
               </div>
 
-                <div class="row">
-                  <div class="col-md-9">
-                    <p>Pas encore membre ? <a href="index.php?controller=personne&action=add1">Cliquez ici</a></p>
-                  </div>
-
-                  <div class="col-md-3">
-                    <input type="submit" value="Sign In" class="btn btn-primary py-2 px-4 text-white">
-                  </div>
-                </div>
-    
 
 
             </form>
