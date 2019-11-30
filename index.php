@@ -65,13 +65,27 @@ if (isset($_REQUEST["action"]))
 
 
             <li><a style="<?php if (isset($_SESSION['id'])) echo "display:block;";
-                          else echo "display:none;"; ?>" href="index.php?controller=personne&action=logout">Déconnexion</a></li>
+                          else echo "display:none;"; ?>" href="index.php?controller=personne&action=logout"><span class="border-left pl-xl-4"></span>Déconnexion</a></li>
 
-            <li class="ml-xl-3 login"><a href="index.php?controller=personne&action=login1"><span class="border-left pl-xl-4"></span>S'identifier</a></li>
-            <li><a href="index.php?controller=personne&action=add1">Inscrivez-vous</a></li>
 
             <li><a style="<?php if (isset($_SESSION['id'])) echo "display:block;";
-                          else echo "display:none;"; ?>" href="index.php?controller=annonce&action=add1" class="cta"><span class="bg-primary text-white rounded">+ Créer une annonce</span></a></li>
+                          else echo "display:none;"; ?>" href="index.php?controller=personne&action=profile">Profile</a></li>
+
+            <li class="ml-xl-3 login">
+              <a style="<?php if (isset($_SESSION['id'])) echo "display:none;";
+                        else echo "display:block;"; ?>" href="index.php?controller=personne&action=login1"><span class="border-left pl-xl-4"></span>Connexion</a>
+            </li>
+
+
+            <li>
+              <a style="<?php if (isset($_SESSION['id'])) echo "display:none;";
+                        else echo "display:block;"; ?>" href="index.php?controller=personne&action=add1">Inscrivez-vous</a>
+            </li>
+
+            <li>
+              <a style="<?php if (isset($_SESSION['id'])) echo "display:block;";
+                        else echo "display:none;"; ?>" href="index.php?controller=annonce&action=add1" class="cta"><span class="bg-primary text-white rounded">+ Créer une annonce</span></a>
+            </li>
           </ul>
         </nav>
       </div>

@@ -1,30 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>ClassyAds &mdash; Colorlib Website Template</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800" rel="stylesheet">
-  <link rel="stylesheet" href="fonts/icomoon/style.css">
-
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/magnific-popup.css">
-  <link rel="stylesheet" href="css/jquery-ui.css">
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-
-  <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
-  <link rel="stylesheet" href="css/aos.css">
-  <link rel="stylesheet" href="css/rangeslider.css">
-
-  <link rel="stylesheet" href="css/style.css">
-
-</head>
 
 <body>
 
@@ -42,26 +19,9 @@
 
 
 
-    <div class="site-blocks-cover inner-page-cover overlay" style="../ac/background-image: url(images/hero_1.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
-      <div class="container">
-        <div class="row align-items-center justify-content-center text-center">
+    
 
-          <div class="col-md-10" data-aos="fade-up" data-aos-delay="400">
-
-
-            <div class="row justify-content-center mt-5">
-              <div class="col-md-8 text-center">
-                <h1>Log In</h1>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="site-section bg-light">
+    <div style="padding-top: 10%;" class="site-section bg-light">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-7 mb-5" data-aos="fade">
@@ -70,17 +30,23 @@
 
             <form method="POST" action="index.php?controller=personne&action=login" class="p-5 bg-white">
 
+              <h2 class="text-center">Se Connecter</h1>
               <div class="row form-group">
+                <div class="col-md-12">
+                  <span style="<?php if (isset($_GET['error'])) echo "display:block";else echo "display:none;" ?>" class="alert-danger text-center">Vérifier vos paramètres de connexion!</span>
+                </div>
 
                 <div class="col-md-12">
                   <label class="text-black">Email</label>
-                  <input type="email" name="email_pers" id="email_pers" class="form-control">
+                  <input type="email" name="email_pers" id="email_pers" class="form-control" required>
                 </div>
 
                 <div class="col-md-12">
                   <label class="text-black">Mot de passe</label>
-                  <input type="password" name="mdp_pers" id="mdp_pers" class="form-control">
+                  <input type="password" name="mdp_pers" id="mdp_pers" class="form-control" required>
                 </div>
+
+
 
               </div>
               <div class="row">

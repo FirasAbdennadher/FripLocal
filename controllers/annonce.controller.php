@@ -11,7 +11,7 @@ $id_an = "";
 $titre_an = "";
 $prix_an = "";
 $description_an = "";
-$date_pub_an = "";
+$date_pub_an = date("F j, Y, g:i a");
 $couleur_an = "";
 $region_an = "";
 $taille = "";
@@ -39,9 +39,6 @@ if (isset($_POST['prix_an']))
 
 if (isset($_POST['description_an']))
 	$description_an = $_POST['description_an'];
-
-if (isset($_POST['date_pub_an']))
-	$date_pub_an = $_POST['date_pub_an'];
 
 if (isset($_POST['couleur_an']))
 	$couleur_an = $_POST['couleur_an'];
@@ -194,5 +191,9 @@ switch ($action) {
 		$annonces = $ann->recherche_avance($cnx, $ch);
 
 		include "vue/annonce/liste_annonce.php";
+		break;
+
+	case "det":
+		include "vue/annonce/det_annonce.php";
 		break;
 }

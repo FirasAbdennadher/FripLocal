@@ -81,7 +81,7 @@ class personne extends fonction
 			$_SESSION['id_role'] = $personne->id_role;
 			$this->redirect("index.php");
 		} else {
-			$this->redirect("login.php?error=1");
+			$this->redirect("index.php?error=1&controller=personne&action=login1");
 		}
 	}
 

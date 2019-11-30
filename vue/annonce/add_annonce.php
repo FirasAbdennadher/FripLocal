@@ -51,11 +51,6 @@
 						</div>
 
 						<div class="col-md-6">
-							<label class="text-black" for="email">Date: </label>
-							<input type="date" class="form-control" name="date_pub_an" required>
-						</div>
-
-						<div class="col-md-6">
 							<label class="text-black" for="email">Couleur: </label>
 							<input type="text" class="form-control" name="couleur_an" required>
 						</div>
@@ -110,7 +105,6 @@
 							<input class="form-control" type="image" id="text" alt="Submit" name="photos[]" multiple="multiple" onchange="readURL(this);">
 							<div class="gallery" width="180"></div>
 						</div>
-
 					</div>
 
 
