@@ -2,6 +2,7 @@
 include "includes/fonction.class.php";
 include "models/annonce.class.php";
 include "models/photo.class.php";
+include "models/personne.class.php";
 include "models/categorie.class.php";
 include "models/marque.class.php";
 
@@ -10,10 +11,12 @@ include "models/marque.class.php";
 $id_an = "";
 $titre_an = "";
 $prix_an = "";
+
 $description_an = "";
-$date_pub_an = date("F j, Y, g:i a");
+$date_pub_an =  date("Y-m-d");
 $couleur_an = "";
 $region_an = "";
+$filepond=array();
 $taille = "";
 $id_marque = "";
 $id_categorie = "";
@@ -25,6 +28,9 @@ $rech_categorie = "";
 $rech_marque = "";
 $ch = "";
 $fn = new fonction();
+if (isset($_POST['status']))
+	$status = $_POST['status'];
+else $status = 'non accepte';
 
 //recupétation des variables externes
 
@@ -111,6 +117,46 @@ if (isset($_POST['rech_categorie'])) {
 
 
 
+
+if (isset($_POST['filepond'])) 
+    $filepond= $_POST['filepond'];
+	$filePondArray=$filepond;
+    // RECEIVE UPLOADS:
+
+   
+ 
+    $baseFileLocation = 'photos/';
+    $numFilePondObjects = sizeof($filePondArray);
+    
+ 
+    
+ 
+    // iterate through the objects...
+    for ($xx=0; $xx<$numFilePondObjects; $xx++) {
+ 
+         $thisFilePondJSON_object = $filePondArray[$xx];
+  
+         $thisFilePondArray = json_decode($thisFilePondJSON_object, true);
+  
+         // isolate the encoded pics...
+        $thisFilePondArray_picData = $thisFilePondArray['data'];
+        $thisFilePondArray_numPics = sizeof($thisFilePondArray_picData);
+      
+        // iterate through pics in this object...
+        $nom_photo=$fn->generer_chaine(8);
+            $thisPic_version = $thisFilePondArray_picData[1]['name'];
+            $thisPic_name_temp = 'photo_' .$nom_photo  .'.jpg';
+            $thisPic_encodedData = $thisFilePondArray_picData[1]['data'];
+            $thisPic_decodedData = base64_decode($thisPic_encodedData);
+           $thisPic_fullPathAndName = $baseFileLocation . $thisPic_name_temp;   
+           
+        file_put_contents($thisPic_fullPathAndName, $thisPic_decodedData);
+		array_push($photos, $thisPic_name_temp);
+        
+  
+    }
+
+
 if (isset($_REQUEST['photo_old']))
 	$photos = $_REQUEST['photo_old'];
 
@@ -150,8 +196,8 @@ if (isset($_FILES['photos'])) {
 
 //************************************************************************************************************************* */
 //creation de l'objet
-$ann = new annonce($id_an, $titre_an, $prix_an, $description_an, $date_pub_an, $couleur_an, $region_an, $taille, $id_marque, $id_categorie, $id_pers, $photos);
-
+$ann = new annonce($id_an, $titre_an, $prix_an, $description_an, $date_pub_an, $couleur_an, $region_an, $taille, $id_marque, $id_categorie, $id_pers, $photos, $status);
+$pers = new personne($id_pers, "", "", "", "", "", "", "");
 
 
 switch ($action) {
@@ -160,9 +206,7 @@ switch ($action) {
 		break;
 
 	case "add":
-
 		$ann->add($cnx);
-
 		break;
 
 	case "edit1":
@@ -175,21 +219,22 @@ switch ($action) {
 		break;
 
 	case "supp":
-
 		$ann->supp($cnx);
 		break;
 
 	case "liste":
-
 		$annonces = $ann->liste($cnx);
-
 		include "vue/annonce/liste_annonce.php";
 		break;
 
+	case "liste_ann_pers":
+		$annonces = $ann->list_by_user($cnx);
+		$personne = $pers->detail($cnx);
+		include "vue/abonnee/profile.php";
+		break;
+
 	case "liste_avance":
-
 		$annonces = $ann->recherche_avance($cnx, $ch);
-
 		include "vue/annonce/liste_annonce.php";
 		break;
 

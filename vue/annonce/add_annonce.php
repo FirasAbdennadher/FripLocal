@@ -25,6 +25,19 @@
 
 					<div class="row form-group">
 
+						<div class="col-md-12">
+							<label class="text-black" for="email">Type: </label>
+							<select class="form-control" onchange="d=document.getElementById('tp_an').value;
+							;if(d=='Chaussures') document.getElementById('pointure').style.display=''  
+							else if (d='Vêtements') document.getElementById('taille').style.display=''  
+							";
+							 id="tp_an">
+								<option selected disabled value="Choisir">Choisir Type</option>
+								<option value="Chaussures">Chaussures</option>
+								<option value="Vêtements">Vêtements</option>
+							</select>
+						</div>
+
 						<div class="col-md-6">
 							<label class="text-black" for="email">Titre: </label>
 							<input type="text" id="text" class="form-control" name="titre_an" required>
@@ -32,7 +45,7 @@
 
 						<div class="col-md-6">
 							<label class="text-black" for="email">Prix: </label>
-							<input type="number_format" class="form-control" name="prix_an" required>
+							<input type="number" class="form-control" name="prix_an" required>
 						</div>
 
 						<div class="col-md-12">
@@ -43,10 +56,14 @@
 						<div class="col-md-12">
 							<label class="text-black" for="email">Region: </label>
 							<select class="form-control" name="region_an">
-								<option value="none">Nothing</option>
-								<option value="guava">Guava</option>
-								<option value="lychee">Lychee</option>
-								<option value="papaya">Papaya</option>
+								<option value="Sfax">Sfax</option>
+								<option value="Tunis">Tunis</option>
+								<option value="Mahdia">Mahdia</option>
+								<option value="Gabes">Gabes</option>
+								<option value="Nabel">Nabel</option>
+								<option value="Sidi Bouziid">Sidi Bouziid</option>
+								<option value="Touzer">Touzer</option>
+								<option value="Gbeli">Gbeli</option>
 							</select>
 						</div>
 
@@ -81,14 +98,21 @@
 							</select>
 						</div>
 
-						<div class="col-md-12" style="display: block;">
-							<label class="text-black" for="email">Pointure: </label>
-							<input type="text" id="text" class="form-control" name="taille">
+						<div class="col-md-6">
+							<label class="text-black">Date: </label>
+							<input display="hidden" type="text" class="form-control" name="date_pub_an" disabled value="<?php echo date("m-d-Y"); ?>">
 						</div>
 
-						<div class="col-md-12" style="display: block;">
-							<label class="text-black" for="email">Taille: </label>
-							<select class="form-control" name="region_an">
+						<div class="col-md-12" id="pointure" style="display: none;">
+							<label class="text-black">Pointure: </label>
+							<input type="text" class="form-control" name="taille" display="blocks">
+						</div>
+
+
+
+						<div class="col-md-12" id="taille" style="display: none;" style="display: block;">
+							<label class="text-black">Taille: </label>
+							<select class="form-control" name="taille">
 								<option value="S">S</option>
 								<option value="XS">XS</option>
 								<option value="M">M</option>
@@ -99,15 +123,19 @@
 								<option value="autre">autre</option>
 							</select>
 						</div>
+					</div>
 
+					<div class="row">
 						<div class="col-md-12">
-							<label class="">Photos: </label>
-							<input class="form-control" type="image" id="text" alt="Submit" name="photos[]" multiple="multiple" onchange="readURL(this);">
-							<div class="gallery" width="180"></div>
+							<input type="file" name="image[]" id="image" multiple accept=".jpg, .png, .gif" />
 						</div>
 					</div>
 
-
+					<div class="row">
+						<div class="col-md-12">
+							<div id="images_list"></div>
+						</div>
+					</div>
 
 					<div class="row">
 						<div class="col-md-9">
@@ -122,35 +150,49 @@
 	</div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
-<script type="text/javascript">
-	function readURL(input) {
-		if ($('#image')[0].files.length > 10) {
-			alert('choisir maximume 10 images');
-
-			0
-		}
+<script>
+	function yesnoCheck() {
 
 	}
-	$(function() {
-		// Multiple images preview in browser
-		var imagesPreview = function(input, placeToInsertImagePreview) {
-			if (input.files) {
-				var filesAmount = input.files.length;
-				if (filesAmount > 10)
-					filesAmount = 10;
-				for (i = 0; i < filesAmount; i++) {
-					var reader = new FileReader();
-					reader.onload = function(event) {
-						$($.parseHTML('<img width="300">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-					}
-					reader.readAsDataURL(input.files[i]);
+</script>
+
+<script>
+	$(document).ready(function() {
+
+		load_images();
+
+		function load_images() {
+			$.ajax({
+				url: "fetch_images.php",
+				success: function(data) {
+					$('#images_list').html(data);
 				}
+			});
+		}
+
+		$('#upload_multiple_images').on('submit', function(event) {
+			event.preventDefault();
+			var image_name = $('#image').val();
+			if (image_name == '') {
+				alert("Please Select Image");
+				return false;
+			} else {
+				$.ajax({
+					url: "insert.php",
+					method: "POST",
+					data: new FormData(this),
+					contentType: false,
+					cache: false,
+					processData: false,
+					success: function(data) {
+						$('#image').val('');
+						load_images();
+					}
+				});
 			}
-		};
-		$('#image').on('change', function() {
-			imagesPreview(this, 'div.gallery');
 		});
+
 	});
 </script>

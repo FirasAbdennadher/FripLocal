@@ -26,34 +26,34 @@
           <div class="row form-group">
 
             <div class="col-md-12">
-              <label class="text-black" for="email">Nom</label>
+              <label class="text-black" for="email">Nom<i class="text-danger">*</i></label>
               <input type="text" name="nom_pers" id="nom_pers" class="form-control" required>
             </div>
 
             <div class="col-md-12">
-              <label class="text-black" for="email">Prenom</label>
+              <label class="text-black" for="email">Prenom<i class="text-danger">*</i></label>
               <input type="text" name="prenom_pers" id="prenom_pers" class="form-control" required>
             </div>
 
             <div class="col-md-12">
-              <label class="text-black" for="email">Email</label>
+              <label class="text-black" for="email">Email<i class="text-danger">*</i></label>
               <input type="email" name="email_pers" id="email_pers" class="form-control" required>
             </div>
 
             <div class="col-md-12">
-              <label class="text-black" for="subject">Mot de passe</label>
+              <label class="text-black" for="subject">Mot de passe<i class="text-danger">*</i></label>
               <input type="password" name="mdp_pers" id="password1" class="form-control" required>
               <span id='messageValid' style="color:red"></span>
             </div>
 
             <div class="col-md-12">
-              <label class="text-black" for="subject">Rentrer mot de passe</label>
+              <label class="text-black" for="subject">Rentrer mot de passe<i class="text-danger">*</i></label>
               <input type="password" id="password2" class="form-control" required>
               <span id='message' style="color:red"></span>
             </div>
 
             <div class="col-md-12">
-              <label class="text-black" for="subject">Numéro de téléphone</label>
+              <label class="text-black" for="subject">Numéro de téléphone<i class="text-danger">*</i></label>
               <input type="number" name="tel_pers" id="tel_pers" class="form-control" required>
             </div>
 

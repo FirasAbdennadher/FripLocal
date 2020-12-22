@@ -14,7 +14,7 @@ if (isset($_REQUEST["action"]))
 <html lang="en">
 
 <head>
-  <title>FRIPLOCAL</title>
+  <title>FRIPELOCAL</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -61,7 +61,7 @@ if (isset($_REQUEST["action"]))
 
           <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
             <li class="active"><a href="index.php">Acceuil</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.php?controller=personne&action=contact">Contact</a></li>
 
 
             <li><a style="<?php if (isset($_SESSION['id'])) echo "display:block;";
@@ -69,7 +69,7 @@ if (isset($_REQUEST["action"]))
 
 
             <li><a style="<?php if (isset($_SESSION['id'])) echo "display:block;";
-                          else echo "display:none;"; ?>" href="index.php?controller=personne&action=profile">Profile</a></li>
+                          else echo "display:none;"; ?>" href="index.php?controller=annonce&action=liste_ann_pers">Profile</a></li>
 
             <li class="ml-xl-3 login">
               <a style="<?php if (isset($_SESSION['id'])) echo "display:none;";
@@ -103,6 +103,47 @@ if (isset($_REQUEST["action"]))
   <body>
 
     <?php include "controllers/$controller.controller.php"; ?>
+    <footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-6">
+              <h2 class="footer-heading mb-4">About</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident rerum unde possimus molestias dolorem fuga, illo quis fugiat!</p>
+            </div>
+
+            <div class="col-md-3">
+              <h2 class="footer-heading mb-4">Navigations</h2>
+              <ul class="list-unstyled">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            </div>
+            <div class="col-md-3">
+              <h2 class="footer-heading mb-4">Follow Us</h2>
+              <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+              <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+              <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+              <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <form action="#" method="post">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Search products..." aria-label="Enter Email" aria-describedby="button-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary text-white" type="button" id="button-addon2">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </footer>
   </body>
 
 

@@ -36,7 +36,7 @@ if (isset($_POST['tel_pers']))
 
 if (isset($_POST['status']))
 	$status = $_POST['status'];
-else $status = 'Non-acceptée';
+else $status = 'non accepte';
 
 
 //creation de l'objet
@@ -59,6 +59,10 @@ switch ($action) {
 		include "vue/abonnee/abn_register.php";
 		break;
 
+	case "contact":
+		include "vue/abonnee/contact.php";
+		break;
+
 
 	case "add":
 		$pers->add($cnx);
@@ -67,17 +71,6 @@ switch ($action) {
 	case "supp":
 
 		$pers->supp($cnx);
-		break;
-
-	case "liste":
-		$personnes = $pers->liste($cnx);
-
-		include "vue/admin/liste_admin.php";
-		break;
-
-	case "edit1":
-		$personne = $pers->detail($cnx);
-		include "vue/admin/modifier_admin.php";
 		break;
 
 	case "edit":

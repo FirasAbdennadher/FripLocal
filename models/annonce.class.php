@@ -13,10 +13,11 @@ class annonce extends fonction{
 	private $id_marque;
 	private $id_categorie;
 	private $id_pers;
+	private $status;
 	private $photos=array();
 
 
-	public function __construct($id_an,$titre_an,$prix_an,$description_an,$date_pub_an,$couleur_an,$region_an,$taille,$id_marque,$id_categorie,$id_pers,$photos){
+	public function __construct($id_an,$titre_an,$prix_an,$description_an,$date_pub_an,$couleur_an,$region_an,$taille,$id_marque,$id_categorie,$id_pers,$photos,$status){
 		$this->id_an = $id_an;
 		$this->titre_an = $titre_an;
 		$this->prix_an = $prix_an;
@@ -28,20 +29,21 @@ class annonce extends fonction{
 		$this->id_marque=$id_marque;
 		$this->id_categorie=$id_categorie;
 		$this->id_pers=$id_pers;
+		$this->status=$status;
 		$this->photos=$photos;
 	}
 
+
 	public function add($cnx){
 
-		$res=$cnx->prepare("insert into annonce(titre_an,prix_an,description_an,date_pub_an,couleur_an,region_an,id_marque, id_categorie,taille,id_pers) VALUES (?,?,?,?,?,?,?,?,?,?)");
-		$res->execute([$this->titre_an, $this->prix_an, $this->description_an,$this->date_pub_an,$this->couleur_an,$this->region_an,$this->id_marque,$this->id_categorie, $this->taille,$this->id_pers]);
+		$res=$cnx->prepare("insert into annonce(titre_an,prix_an,description_an,date_pub_an,couleur_an,region_an,id_marque, id_categorie,taille,id_pers,status) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+		$res->execute([$this->titre_an, $this->prix_an, $this->description_an,$this->date_pub_an,$this->couleur_an,$this->region_an,$this->id_marque,$this->id_categorie, $this->taille,$this->id_pers,$this->status]);
 		$id=$cnx->lastInsertId();
 		foreach ($this->photos as $photo){
 			$ph= new photo("",$photo,$id);
 			$ph-> add($cnx);
         }
-		
-		$this->redirect("index.php?controller=annonce&action=liste");
+		$this->redirect("index.php?controller=annonce&action=liste_ann_pers");
 	}
 	
 	public function edit($cnx){
@@ -58,7 +60,7 @@ class annonce extends fonction{
 		$res->bindParam(10,$this->id_pers);
 		$res->bindParam(11,$this->id_an);
 		$res->execute();
-		$this->redirect("index.php?controller=annonce&action=liste");
+		$this->redirect("index.php?controller=annonce&action=liste_ann_pers");
 	}
 	
 	public function supp($cnx){
@@ -70,15 +72,21 @@ class annonce extends fonction{
 			
 		unlink("photos/".$p->nom_photo);
 	}
-		$this->redirect("index.php?controller=annonce&action=liste");
+		$this->redirect("index.php?controller=annonce&action=liste_ann_pers");
 	}
 	
 	public function liste($cnx){
-		$annonces=$cnx->query("select * from annonce")->fetchAll(PDO::FETCH_OBJ);
+		$annonces=$cnx->query("select * from annonce where status= 'Accepte'")->fetchAll(PDO::FETCH_OBJ);
 		return $annonces;
 	}
+
+	public function list_by_user($cnx){
+		$annonces=$cnx->query("select * from annonce  where id_pers ='".$this->id_pers."'")->fetchAll(PDO::FETCH_OBJ);
+		return $annonces;
+	}
+
 	public function recherche_avance($cnx, $ch){
-		$annonces=$cnx->query("select * from annonce where ".$ch)->fetchAll(PDO::FETCH_OBJ);
+		$annonces=$cnx->query("select * from annonce where ".$ch."and status= 'Accepte'")->fetchAll(PDO::FETCH_OBJ);
 		return $annonces;
 	}
 	

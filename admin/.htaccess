@@ -1,0 +1,23 @@
+Options +FollowSymlinks
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^http://localhost|http://127.0.0.1
+RewriteRule ^.*\.png|jpg|gif|css|js$ - [F]
+
+
+AuthName "Authentification!"
+AuthType Basic
+AuthUserFile "c:/xampp/htdocs/FRIPLOCAL_EXAM/admin/.htpasswd"
+Require valid-user
+
+RewriteRule ^pdf_([a-z1-9]+)_([a-z1-9]+)\.html$ pdf.php?controller=$1&action=$2 [L]
+
+RewriteRule ^excel_([a-z1-9]+)_([a-z1-9]+)_([a-z1-9]+)\.html$ excel.php?controller=$1&action=$2&pays=$3 [L]
+
+RewriteRule ^dashboard_([a-z1-9]+)_([a-z1-9]+)_([1-9]+)\.html$ dashboard.php?controller=$1&action=$2&id=$3 [L]
+
+RewriteRule ^(.*)_([a-z1-9]+)_([a-z1-9]+)\.html$ dashboard.php?controller=$2&action=$3 [L]
+
+
+RewriteRule ^(.*)_([a-z1-9]+)_([a-z0-9]+)_([0-9]+)_([a-zA-Z0-9\.]+)\.html$ index.php?controller=$2&action=$3&id=$4&photo_old=$5 [L]
+
+RewriteRule ^(.*)\.html$ dashboard.php [L]
